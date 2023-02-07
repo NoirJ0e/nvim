@@ -1,5 +1,5 @@
 local keymap = require('core.keymap')
-local nmap, imap, cmap, xmap = keymap.nmap, keymap.imap, keymap.cmap, keymap.xmap
+local nmap, imap, cmap, xmap, vmap = keymap.nmap, keymap.imap, keymap.cmap, keymap.xmap, keymap.vmap
 local silent, noremap = keymap.silent, keymap.noremap
 local opts = keymap.new_opts
 local cmd = keymap.cmd
@@ -21,15 +21,20 @@ nmap({
   -- yank
   { 'Y', 'y$', opts(noremap) },
   -- buffer jump
-  { ']b', cmd('bn'), opts(noremap) },
-  { '[b', cmd('bp'), opts(noremap) },
+  { '<S-l>', cmd('bn'), opts(noremap) },
+  { '<S-h>', cmd('bp'), opts(noremap) },
   -- remove trailing white space
   { '<Leader>t', cmd('TrimTrailingWhitespace'), opts(noremap) },
   -- window jump
-  { '<C-h>', '<C-w>h', opts(noremap) },
-  { '<C-l>', '<C-w>l', opts(noremap) },
-  { '<C-j>', '<C-w>j', opts(noremap) },
-  { '<C-k>', '<C-w>k', opts(noremap) },
+  { '<Leader>h', '<C-w>h', opts(noremap) },
+  { '<Leader>l', '<C-w>l', opts(noremap) },
+  { '<Leader>j', '<C-w>j', opts(noremap) },
+  { '<Leader>k', '<C-w>k', opts(noremap) },
+  -- split window
+  { 'ss', cmd('split'), opts(noremap, silent) },
+  { 'sv', cmd('vsplit'), opts(noremap, silent) },
+  -- close frame
+  { '<Leader>c', cmd('quit'), opts(noremap, silent) },
 })
 
 imap({
@@ -53,6 +58,6 @@ nmap({
   { '<Leader>e', cmd('NvimTreeToggle'), opts(noremap, silent) },
   -- Telescope
   { '<Leader>b', cmd('Telescope buffers'), opts(noremap, silent) },
-  { '<Leader>fa', cmd('Telescope live_grep'), opts(noremap, silent) },
-  { '<Leader>ff', cmd('Telescope find_files'), opts(noremap, silent) },
+  { ';r', cmd('Telescope live_grep'), opts(noremap, silent) },
+  { ';f', cmd('Telescope find_files'), opts(noremap, silent) },
 })

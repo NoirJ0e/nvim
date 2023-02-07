@@ -1,7 +1,7 @@
 local config = {}
 
-function config.zephyr()
-  vim.cmd('colorscheme zephyr')
+function config.kanagawa()
+  vim.cmd('colorscheme kanagawa')
 end
 
 function config.dashboard()
