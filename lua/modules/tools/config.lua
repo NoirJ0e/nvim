@@ -1,7 +1,7 @@
 local config = {}
 
 function config.telescope()
-  require('telecope').setup({
+  require('telescope').setup({
       defaults = {
           layout_config = {
               horizontal = { prompt_position = 'top', results_width = 0.6 },
@@ -101,6 +101,24 @@ end
 
 function config.gitsigns()
   require('gitsigns').setup {}
+end
+
+function config.code_runner()
+  require('code_runner').setup({
+      -- put here the commands by filetype
+      filetype = {
+          java = "cd $dir && javac $fileName && java $fileNameWithoutExt",
+          python = "python3 -u",
+          typescript = "deno run",
+          javascript = "deno run",
+          rust = "cd $dir && rustc $fileName && $dir/$fileNameWithoutExt",
+          c = "cd $dir && gcc $fileName -o $fileNameWithoutExt && ./$fileNameWithoutExt",
+      },
+      term = {
+          position = "belowright",
+          size = 12,
+      },
+  })
 end
 
 return config

@@ -29,6 +29,8 @@ package({
     },
 })
 
+package({ 'CRAG666/code_runner.nvim', config = conf.code_runner })
+
 package({ 'windwp/nvim-autopairs', config = conf.autopairs })
 package({ 'hoob3rt/lualine.nvim', config = conf.lualine })
 package({ 'numToStr/Comment.nvim', config = conf.Comment })

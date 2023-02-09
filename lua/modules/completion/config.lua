@@ -40,6 +40,7 @@ function config.nvim_lsp()
       },
   }
 
+  -- python server settings
   nvim_lsp.pyright.setup {
       capabilities = capabilities,
   }
@@ -53,8 +54,17 @@ function config.nvim_lsp()
   -- typescript
   nvim_lsp.tsserver.setup {
       on_attach = on_attach,
-      filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript" },
+      filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", },
       cmd = { "typescript-language-server", "--stdio" }
+  }
+
+  -- beancount
+  nvim_lsp.beancount.setup {
+      on_attach = on_attach,
+      init_options = {
+          -- journal_file = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/All_In_One/Beancount/main.beancount",
+          journal_file = "~/main.beancount",
+      },
   }
 end
 
@@ -242,6 +252,7 @@ function config.lspconfig()
   -- typescript
   nvim_lsp.tsserver.setup {
       on_attach = on_attach,
+      capabilities = capabilities,
       filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript" },
       cmd = { "typescript-language-server", "--stdio" }
   }
