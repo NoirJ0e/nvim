@@ -121,4 +121,8 @@ function config.code_runner()
   })
 end
 
+function config.toggleterm()
+  require("toggleterm").setup()
+end
+
 return config

@@ -64,4 +64,8 @@ nmap({
     { '<Leader>rc', cmd('RunCode'),              opts(noremap, silent) },
     { '<Leader>rf', cmd('RunFile'),              opts(noremap, silent) },
     { '<Leader>rq', cmd('RunClose'),             opts(noremap, silent) },
+    -- transparent
+    { '<Leader>tr', cmd('TransparentToggle'),    opts(noremap, silent) },
+    -- toggle term
+    { '<C-\\>',     cmd('ToggleTerm'),           opts(silent) }
 })
