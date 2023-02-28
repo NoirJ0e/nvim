@@ -29,6 +29,14 @@ package({
     },
 })
 
+package({
+    'folke/todo-comments.nvim',
+    config = conf.todo_comments,
+    dependencies = {
+        { 'nvim-lua/plenary.nvim' },
+    }
+})
+
 package({ 'CRAG666/code_runner.nvim', config = conf.code_runner })
 
 package({ 'windwp/nvim-autopairs', config = conf.autopairs })
@@ -39,3 +47,4 @@ package({ 'ethanholz/nvim-lastplace', config = conf.lastplace })
 package({ 'lukas-reineke/indent-blankline.nvim', config = conf.indent_blankline })
 package({ 'lewis6991/gitsigns.nvim', config = conf.gitsigns })
 package({ 'akinsho/toggleterm.nvim', config = conf.toggleterm })
+package({ 'github/copilot.vim'})

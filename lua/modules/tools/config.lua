@@ -80,7 +80,21 @@ function config.Comment()
 end
 
 function config.neoscroll()
-  require('neoscroll').setup {}
+  -- require('neoscroll').setup {}
+  require('neoscroll').setup({
+      pre_hook = function()
+        vim.opt.eventignore:append({
+            'WinScrolled',
+            'CursorMoved',
+        })
+      end,
+      post_hook = function()
+        vim.opt.eventignore:remove({
+            'WinScrolled',
+            'CursorMoved',
+        })
+      end,
+  })
 end
 
 function config.lastplace()
@@ -112,7 +126,8 @@ function config.code_runner()
           typescript = "deno run",
           javascript = "deno run",
           rust = "cd $dir && rustc $fileName && $dir/$fileNameWithoutExt",
-          c = "cd $dir && gcc $fileName -o $fileNameWithoutExt && ./$fileNameWithoutExt",
+          -- c = "clang $dir/$fileName -Wall -o $dir/$fileNameWithoutExt && .$dir/$fileNameWithoutExt",
+          c = "(cd $dir && clang $fileName -Wall -o $fileNameWithoutExt ; ./$fileNameWithoutExt)",
       },
       term = {
           position = "belowright",
@@ -123,6 +138,11 @@ end
 
 function config.toggleterm()
   require("toggleterm").setup()
+end
+
+function config.todo_comments()
+  require('todo-comments').setup {
+  }
 end
 
 return config

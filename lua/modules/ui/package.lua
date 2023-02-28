@@ -3,6 +3,8 @@ local conf = require('modules.ui.config')
 
 -- package({ 'glepnir/zephyr-nvim', config = conf.zephyr })
 package({ 'rebelot/kanagawa.nvim', config = conf.kanagawa })
+package({ 'shaunsingh/nord.nvim', config = conf.nord })
+
 
 package({ 'glepnir/dashboard-nvim', config = conf.dashboard })
 
@@ -14,5 +16,3 @@ package({
 })
 
 package({ 'akinsho/nvim-bufferline.lua', config = conf.nvim_bufferline, dependencies = { 'nvim-tree/nvim-web-devicons' } })
-
-package({ 'xiyaowong/nvim-transparent', config = conf.nvim_transparent })

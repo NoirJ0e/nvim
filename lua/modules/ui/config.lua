@@ -1,7 +1,11 @@
 local config = {}
 
-function config.kanagawa()
-  vim.cmd('colorscheme kanagawa')
+-- function config.kanagawa()
+--   vim.cmd('colorscheme kanagawa')
+-- end
+
+function config.nord()
+  vim.cmd('colorscheme nord')
 end
 
 function config.dashboard()
@@ -52,24 +56,6 @@ function config.nvim_tree()
       disable_netrw = false,
       hijack_cursor = true,
       hijack_netrw = true,
-  })
-end
-
-function config.nvim_transparent()
-  require("transparent").setup({
-      enable = true, -- boolean: enable transparent
-      extra_groups = { -- table/string: additional groups that should be cleared
-          -- In particular, when you set it to 'all', that means all available groups
-
-          -- example of akinsho/nvim-bufferline.lua
-          "BufferLineTabClose",
-          "BufferlineBufferSelected",
-          "BufferLineFill",
-          "BufferLineBackground",
-          "BufferLineSeparator",
-          "BufferLineIndicatorSelected",
-      },
-      exclude = {}, -- table: groups you don't want to clear
   })
 end
 
