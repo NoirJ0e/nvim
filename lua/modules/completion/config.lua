@@ -58,13 +58,24 @@ function config.nvim_lsp()
       cmd = { "typescript-language-server", "--stdio" }
   }
 
-  -- beancount
-  nvim_lsp.beancount.setup {
+  -- rust
+  nvim_lsp.rust_analyzer.setup {
       on_attach = on_attach,
-      init_options = {
-          -- journal_file = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/All_In_One/Beancount/main.beancount",
-          journal_file = "~/main.beancount",
-      },
+      capabilities = capabilities,
+      settings = {
+          ["rust-analyzer"] = {
+              assist = {
+                  importGranularity = "module",
+                  importPrefix = "by_self",
+              },
+              cargo = {
+                  loadOutDirsFromCheck = true
+              },
+              procMacro = {
+                  enable = true
+              },
+          }
+      }
   }
 end
 
@@ -200,64 +211,6 @@ function config.mason_lspconfig()
   }
 end
 
-function config.lspconfig()
-  local status, nvim_lsp = pcall(require, 'lspconfig')
-  if (not status) then return end
-
-  local protocol = require('vim.lsp.protocol')
-
-  local on_attach = function(client, bufnr)
-    -- formatting
-    if client.server_capabilities.documentFormattingProvider then
-      vim.api.nvim_command [[augroup Format ]]
-      vim.api.nvim_command [[autocmd! * <buffer>]]
-      -- vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
-      vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
-      vim.api.nvim_command [[augroup END]]
-    end
-  end
-
-  local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-
-  -- lua server settings
-  nvim_lsp.sumneko_lua.setup {
-      on_attach = on_attach,
-      settings = {
-          Lua = {
-              diagnostics = {
-                  -- Get the language server to recognize the `vim` global
-                  globals = { 'vim' },
-              },
-
-              workspace = {
-                  -- Make the server aware of Neovim runtime files
-                  library = vim.api.nvim_get_runtime_file("", true),
-                  checkThirdParty = false
-              },
-          },
-      },
-  }
-
-  nvim_lsp.pyright.setup {
-      capabilities = capabilities,
-  }
-  nvim_lsp.marksman.setup {
-      capabilities = capabilities,
-  }
-  nvim_lsp.jdtls.setup {}
-  nvim_lsp.clangd.setup {
-      capabilities = capabilities,
-  }
-  -- typescript
-  nvim_lsp.tsserver.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript" },
-      cmd = { "typescript-language-server", "--stdio" }
-  }
-end
-
 function config.lspsaga()
   local status, lspkind = pcall(require, "lspkind")
   if (not status) then return end
@@ -304,6 +257,14 @@ function config.lspsaga()
           TypeParameter = ""
       },
   })
+end
+
+function config.im_select()
+  require('im_selet').setup()
+end
+
+function config.rust_tools()
+  require('rust-tools').setup()
 end
 
 return config

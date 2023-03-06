@@ -34,3 +34,4 @@ package({
 
 package({ 'onsails/lspkind.nvim', config = conf.lspkind })
 package({ 'L3MON4D3/LuaSnip', event = 'InsertCharPre', config = conf.lua_snip })
+package({ 'simrat39/rust-tools.nvim', config = conf.rust_tools })

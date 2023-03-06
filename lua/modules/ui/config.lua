@@ -1,12 +1,12 @@
 local config = {}
 
--- function config.kanagawa()
---   vim.cmd('colorscheme kanagawa')
--- end
-
-function config.nord()
-  vim.cmd('colorscheme nord')
+function config.kanagawa()
+  vim.cmd('colorscheme kanagawa')
 end
+
+-- function config.nord()
+--   vim.cmd('colorscheme nord')
+-- end
 
 function config.dashboard()
   local db = require('dashboard')
