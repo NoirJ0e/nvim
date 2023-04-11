@@ -22,60 +22,59 @@ function config.nvim_lsp()
 
 
   -- lua server settings
-  nvim_lsp.sumneko_lua.setup {
-      on_attach = on_attach,
-      settings = {
-          Lua = {
-              diagnostics = {
-                  -- Get the language server to recognize the `vim` global
-                  globals = { 'vim' },
-              },
-
-              workspace = {
-                  -- Make the server aware of Neovim runtime files
-                  library = vim.api.nvim_get_runtime_file("", true),
-                  checkThirdParty = false
-              },
-          },
+  nvim_lsp.lua_ls.setup {
+    on_attach = on_attach,
+    settings = {
+      Lua = {
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = { 'vim' },
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file("", true),
+          checkThirdParty = false
+        },
       },
+    },
   }
 
   -- python server settings
   nvim_lsp.pyright.setup {
-      capabilities = capabilities,
+    capabilities = capabilities,
   }
   nvim_lsp.marksman.setup {
-      capabilities = capabilities,
+    capabilities = capabilities,
   }
   nvim_lsp.jdtls.setup {}
   nvim_lsp.clangd.setup {
-      capabilities = capabilities,
+    capabilities = capabilities,
   }
   -- typescript
   nvim_lsp.tsserver.setup {
-      on_attach = on_attach,
-      filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", },
-      cmd = { "typescript-language-server", "--stdio" }
+    on_attach = on_attach,
+    filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", },
+    cmd = { "typescript-language-server", "--stdio" }
   }
 
   -- rust
   nvim_lsp.rust_analyzer.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      settings = {
-          ["rust-analyzer"] = {
-              assist = {
-                  importGranularity = "module",
-                  importPrefix = "by_self",
-              },
-              cargo = {
-                  loadOutDirsFromCheck = true
-              },
-              procMacro = {
-                  enable = true
-              },
-          }
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+      ["rust-analyzer"] = {
+        assist = {
+          importGranularity = "module",
+          importPrefix = "by_self",
+        },
+        cargo = {
+          loadOutDirsFromCheck = true
+        },
+        procMacro = {
+          enable = true
+        },
       }
+    }
   }
 end
 
@@ -85,38 +84,38 @@ function config.nvim_cmp()
   local lspkind = require 'lspkind'
 
   cmp.setup({
-      snippet = {
-          expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-          end,
-      },
-      mapping = cmp.mapping.preset.insert({
-          ['<C-n>'] = function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            else
-              fallback()
-            end
-          end,
-          ['<CR>'] = cmp.mapping.confirm({
-              behavior = cmp.ConfirmBehavior.Replace,
-              select = true
-          }),
-          ['Esc'] = cmp.mapping.close(),
+    snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body)
+      end,
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-n>'] = function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          fallback()
+        end
+      end,
+      ['<CR>'] = cmp.mapping.confirm({
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true
       }),
-      sources = cmp.config.sources({
-          { name = 'nvim_lsp' }, -- For nvim-lsp
-          { name = 'buffer' }, -- For buffer text
-          -- { name = 'vsnip' }, -- For vsnip user
-          { name = 'path' }, -- For path complete
-          { name = 'luasnip' }, -- For luasnip
-      }),
-      formatting = {
-          format = lspkind.cmp_format({
-              wirth_text = false,
-              maxwidth = 50
-          })
-      }
+      ['Esc'] = cmp.mapping.close(),
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' }, -- For nvim-lsp
+      { name = 'buffer' },   -- For buffer text
+      -- { name = 'vsnip' }, -- For vsnip user
+      { name = 'path' },     -- For path complete
+      { name = 'luasnip' },  -- For luasnip
+    }),
+    formatting = {
+      format = lspkind.cmp_format({
+        wirth_text = false,
+        maxwidth = 50
+      })
+    }
   })
 
   vim.cmd [[
@@ -152,46 +151,46 @@ function config.lspkind()
   if (not status) then return end
 
   lspkind.init({
-      -- enables text annotations
-      --
-      -- default: true
-      mode = 'symbol',
-      -- default symbol map
-      -- can be either 'default' (requires nerd-fonts font) or
-      -- 'codicons' for codicon preset (requires vscode-codicons font)
-      --
-      -- default: 'default'
-      preset = 'codicons',
-      -- override preset symbols
-      --
-      -- default: {}
-      symbol_map = {
-          Text = "",
-          Method = "",
-          Function = "",
-          Constructor = "",
-          Field = "ﰠ",
-          Variable = "",
-          Class = "ﴯ",
-          Interface = "",
-          Module = "",
-          Property = "ﰠ",
-          Unit = "塞",
-          Value = "",
-          Enum = "",
-          Keyword = "",
-          Snippet = "",
-          Color = "",
-          File = "",
-          Reference = "",
-          Folder = "",
-          EnumMember = "",
-          Constant = "",
-          Struct = "פּ",
-          Event = "",
-          Operator = "",
-          TypeParameter = ""
-      },
+    -- enables text annotations
+    --
+    -- default: true
+    mode = 'symbol',
+    -- default symbol map
+    -- can be either 'default' (requires nerd-fonts font) or
+    -- 'codicons' for codicon preset (requires vscode-codicons font)
+    --
+    -- default: 'default'
+    preset = 'codicons',
+    -- override preset symbols
+    --
+    -- default: {}
+    symbol_map = {
+      Text = "",
+      Method = "",
+      Function = "",
+      Constructor = "",
+      Field = "ﰠ",
+      Variable = "",
+      Class = "ﴯ",
+      Interface = "",
+      Module = "",
+      Property = "ﰠ",
+      Unit = "塞",
+      Value = "",
+      Enum = "",
+      Keyword = "",
+      Snippet = "",
+      Color = "",
+      File = "",
+      Reference = "",
+      Folder = "",
+      EnumMember = "",
+      Constant = "",
+      Struct = "פּ",
+      Event = "",
+      Operator = "",
+      TypeParameter = ""
+    },
   })
 end
 
@@ -207,7 +206,7 @@ function config.mason_lspconfig()
   if (not status) then return end
 
   lspconfig.setup {
-      ensure_installed = { "sumneko_lua", "pyright" },
+    ensure_installed = {},
   }
 end
 
@@ -216,46 +215,46 @@ function config.lspsaga()
   if (not status) then return end
 
   lspkind.init({
-      -- enables text annotations
-      --
-      -- default: true
-      mode = 'symbol',
-      -- default symbol map
-      -- can be either 'default' (requires nerd-fonts font) or
-      -- 'codicons' for codicon preset (requires vscode-codicons font)
-      --
-      -- default: 'default'
-      preset = 'codicons',
-      -- override preset symbols
-      --
-      -- default: {}
-      symbol_map = {
-          Text = "",
-          Method = "",
-          Function = "",
-          Constructor = "",
-          Field = "ﰠ",
-          Variable = "",
-          Class = "ﴯ",
-          Interface = "",
-          Module = "",
-          Property = "ﰠ",
-          Unit = "塞",
-          Value = "",
-          Enum = "",
-          Keyword = "",
-          Snippet = "",
-          Color = "",
-          File = "",
-          Reference = "",
-          Folder = "",
-          EnumMember = "",
-          Constant = "",
-          Struct = "פּ",
-          Event = "",
-          Operator = "",
-          TypeParameter = ""
-      },
+    -- enables text annotations
+    --
+    -- default: true
+    mode = 'symbol',
+    -- default symbol map
+    -- can be either 'default' (requires nerd-fonts font) or
+    -- 'codicons' for codicon preset (requires vscode-codicons font)
+    --
+    -- default: 'default'
+    preset = 'codicons',
+    -- override preset symbols
+    --
+    -- default: {}
+    symbol_map = {
+      Text = "",
+      Method = "",
+      Function = "",
+      Constructor = "",
+      Field = "ﰠ",
+      Variable = "",
+      Class = "ﴯ",
+      Interface = "",
+      Module = "",
+      Property = "ﰠ",
+      Unit = "塞",
+      Value = "",
+      Enum = "",
+      Keyword = "",
+      Snippet = "",
+      Color = "",
+      File = "",
+      Reference = "",
+      Folder = "",
+      EnumMember = "",
+      Constant = "",
+      Struct = "פּ",
+      Event = "",
+      Operator = "",
+      TypeParameter = ""
+    },
   })
 end
 
