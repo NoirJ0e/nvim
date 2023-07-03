@@ -17,7 +17,7 @@ nmap({
   -- close buffer
   { '<C-x>k',    cmd('bdelete'),                opts(noremap, silent) },
   -- save
-  { '<C-s>',     cmd('write'),                  opts(noremap) },
+  -- { '<C-s>',     cmd('write'),                  opts(noremap) },
   -- yank
   { 'Y',         'y$',                          opts(noremap) },
   -- buffer jump
